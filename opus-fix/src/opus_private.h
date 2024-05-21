@@ -71,12 +71,12 @@ int get_mono_channel(const ChannelLayout *layout, int stream_id, int prev);
   * ultimately expected to bias an automatic signal classifier, but it currently
   * just shifts the static bitrate to mode mapping around a little bit.
   *
-  * @param[in] x <tt>int</tt>:   Voice percentage in the range 0-100, inclusive.
+  * @param[in] x int:   Voice percentage in the range 0-100, inclusive.
   * @hideinitializer */
 #define OPUS_SET_VOICE_RATIO(x) OPUS_SET_VOICE_RATIO_REQUEST, __opus_check_int(x)
 /** Gets the encoder's configured voice ratio value, @see OPUS_SET_VOICE_RATIO
   *
-  * @param[out] x <tt>int*</tt>:  Voice percentage in the range 0-100, inclusive.
+  * @param[out] x int*:  Voice percentage in the range 0-100, inclusive.
   * @hideinitializer */
 #define OPUS_GET_VOICE_RATIO(x) OPUS_GET_VOICE_RATIO_REQUEST, __opus_check_int_ptr(x)
 

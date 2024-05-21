@@ -63,10 +63,10 @@ namespace Concentus.Structs
   * configuration (coding mode, audio bandwidth, frame size, or channel count).
   * Failure to do so will prevent a new packet from being added with
   * opus_repacketizer_cat().
-  * @see opus_repacketizer_create
-  * @see opus_repacketizer_get_size
-  * @see opus_repacketizer_cat
-  * @param rp <tt>OpusRepacketizer*</tt>: The repacketizer state to
+  * see: opus_repacketizer_create
+  * see: opus_repacketizer_get_size
+  * see: opus_repacketizer_cat
+  * @param rp OpusRepacketizer*: The repacketizer state to
   *                                       (re)initialize.
   */
         public void Reset()
@@ -143,22 +143,21 @@ namespace Concentus.Structs
   * If you wish to be able to add parts of such packets, you should first use
   * another repacketizer to split the packet into pieces and add them
   * individually.
-  * @see opus_repacketizer_out_range
-  * @see opus_repacketizer_out
-  * @see opus_repacketizer_init
-  * @param rp <tt>OpusRepacketizer*</tt>: The repacketizer state to which to
+  * see: opus_repacketizer_out_range
+  * see: opus_repacketizer_out
+  * see: opus_repacketizer_init
+  * @param rp OpusRepacketizer*: The repacketizer state to which to
   *                                       add the packet.
-  * @param[in] data <tt>const unsigned char*</tt>: The packet data.
+  * @param[in] data const unsigned char*: The packet data.
   *                                                The application must ensure
   *                                                this pointer remains valid
   *                                                until the next call to
   *                                                opus_repacketizer_init() or
   *                                                opus_repacketizer_destroy().
-  * @param len <tt>opus_int32</tt>: The number of bytes in the packet data.
-  * @returns An error code indicating whether or not the operation succeeded.
-  * @retval #OPUS_OK The packet's contents have been added to the repacketizer
+  * @param len opus_int32: The number of bytes in the packet data.
+  * @return  An error code indicating whether or not the operation succeeded. OR #OPUS_OK The packet's contents have been added to the repacketizer
   *                  state.
-  * @retval #OPUS_INVALID_PACKET The packet did not have a valid TOC sequence,
+  * @return #OPUS_INVALID_PACKET The packet did not have a valid TOC sequence,
   *                              the packet's TOC sequence was not compatible
   *                              with previously submitted packets (because
   *                              the coding mode, audio bandwidth, frame size,
@@ -177,9 +176,9 @@ namespace Concentus.Structs
   * call to opus_repacketizer_init() or opus_repacketizer_create().
   * This defines the valid range of packets that can be extracted with
   * opus_repacketizer_out_range() or opus_repacketizer_out().
-  * @param rp <tt>OpusRepacketizer*</tt>: The repacketizer state containing the
+  * @param rp OpusRepacketizer*: The repacketizer state containing the
   *                                       frames.
-  * @returns The total number of frames contained in the packet data submitted
+  * @return The total number of frames contained in the packet data submitted
   *          to the repacketizer state.
   */
         public int GetNumFrames()
@@ -328,16 +327,16 @@ namespace Concentus.Structs
 
         /** Construct a new packet from data previously submitted to the repacketizer
   * state via opus_repacketizer_cat().
-  * @param rp <tt>OpusRepacketizer*</tt>: The repacketizer state from which to
+  * @param rp OpusRepacketizer*: The repacketizer state from which to
   *                                       construct the new packet.
-  * @param begin <tt>int</tt>: The index of the first frame in the current
+  * @param begin int: The index of the first frame in the current
   *                            repacketizer state to include in the output.
-  * @param end <tt>int</tt>: One past the index of the last frame in the
+  * @param end int: One past the index of the last frame in the
   *                          current repacketizer state to include in the
   *                          output.
-  * @param[out] data <tt>const unsigned char*</tt>: The buffer in which to
+  * @param[out] data const unsigned char*: The buffer in which to
   *                                                 store the output packet.
-  * @param maxlen <tt>opus_int32</tt>: The maximum number of bytes to store in
+  * @param maxlen opus_int32: The maximum number of bytes to store in
   *                                    the output buffer. In order to guarantee
   *                                    success, this should be at least
   *                                    <code>1276</code> for a single frame,
@@ -349,12 +348,12 @@ namespace Concentus.Structs
   *                                    opus_repacketizer_init() or
   *                                    opus_repacketizer_create() is also
   *                                    sufficient, and possibly much smaller.
-  * @returns The total size of the output packet on success, or an error code
+  * @return The total size of the output packet on success, or an error code
   *          on failure.
-  * @retval #OPUS_BAD_ARG <code>[begin,end)</code> was an invalid range of
+  * @return #OPUS_BAD_ARG <code>[begin,end)</code> was an invalid range of
   *                       frames (begin &lt; 0, begin &gt;= end, or end &gt;
   *                       opus_repacketizer_get_nb_frames()).
-  * @retval #OPUS_BUFFER_TOO_SMALL \a maxlen was insufficient to contain the
+  * @return #OPUS_BUFFER_TOO_SMALL \a maxlen was insufficient to contain the
   *                                complete output packet.
   */
         public int CreatePacket(int begin, int end, byte[] data, int data_offset, int maxlen)
@@ -371,11 +370,11 @@ namespace Concentus.Structs
   * opus_repacketizer_out_range(rp, 0, opus_repacketizer_get_nb_frames(rp),
   *                             data, maxlen)
   * @endcode
-  * @param rp <tt>OpusRepacketizer*</tt>: The repacketizer state from which to
+  * @param rp OpusRepacketizer*: The repacketizer state from which to
   *                                       construct the new packet.
-  * @param[out] data <tt>const unsigned char*</tt>: The buffer in which to
+  * @param[out] data const unsigned char*: The buffer in which to
   *                                                 store the output packet.
-  * @param maxlen <tt>opus_int32</tt>: The maximum number of bytes to store in
+  * @param maxlen opus_int32: The maximum number of bytes to store in
   *                                    the output buffer. In order to guarantee
   *                                    success, this should be at least
   *                                    <code>1277*opus_repacketizer_get_nb_frames(rp)</code>.
@@ -386,9 +385,9 @@ namespace Concentus.Structs
   *                                    last call to opus_repacketizer_init() or
   *                                    opus_repacketizer_create() is also
   *                                    sufficient, and possibly much smaller.
-  * @returns The total size of the output packet on success, or an error code
+  * @return The total size of the output packet on success, or an error code
   *          on failure.
-  * @retval #OPUS_BUFFER_TOO_SMALL \a maxlen was insufficient to contain the
+  * @return #OPUS_BUFFER_TOO_SMALL \a maxlen was insufficient to contain the
   *                                complete output packet.
   */
         public int CreatePacket(byte[] data, int data_offset, int maxlen)
@@ -397,16 +396,13 @@ namespace Concentus.Structs
         }
 
         /** Pads a given Opus packet to a larger size (possibly changing the TOC sequence).
-  * @param[in,out] data <tt>const unsigned char*</tt>: The buffer containing the
+  * @param[in,out] data const unsigned char*: The buffer containing the
   *                                                   packet to pad.
-  * @param len <tt>opus_int32</tt>: The size of the packet.
+  * @param len opus_int32: The size of the packet.
   *                                 This must be at least 1.
-  * @param new_len <tt>opus_int32</tt>: The desired size of the packet after padding.
+  * @param new_len opus_int32: The desired size of the packet after padding.
   *                                 This must be at least as large as len.
-  * @returns an error code
-  * @retval #OPUS_OK \a on success.
-  * @retval #OPUS_BAD_ARG \a len was less than 1 or new_len was less than len.
-  * @retval #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
+  * @return   an error code OR #OPUS_OK \a on success. OR  #OPUS_BAD_ARG \a len was less than 1 or new_len was less than len. OR #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
   */
         public static int PadPacket(Span<byte> data, int data_offset, int len, int new_len)
         {
@@ -432,14 +428,13 @@ namespace Concentus.Structs
 
         /** Remove all padding from a given Opus packet and rewrite the TOC sequence to
   * minimize space usage.
-  * @param[in,out] data <tt>const unsigned char*</tt>: The buffer containing the
+  * @param[in,out] data const unsigned char*: The buffer containing the
   *                                                   packet to strip.
-  * @param len <tt>opus_int32</tt>: The size of the packet.
+  * @param len opus_int32: The size of the packet.
   *                                 This must be at least 1.
-  * @returns The new size of the output packet on success, or an error code
+  * @return The new size of the output packet on success, or an error code
   *          on failure.
-  * @retval #OPUS_BAD_ARG \a len was less than 1.
-  * @retval #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
+  * @return  #OPUS_BAD_ARG \a len was less than 1. OR #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
   */
         public static int UnpadPacket(byte[] data, int data_offset, int len)
         {
@@ -459,18 +454,15 @@ namespace Concentus.Structs
         }
 
         /** Pads a given Opus multi-stream packet to a larger size (possibly changing the TOC sequence).
-  * @param[in,out] data <tt>const unsigned char*</tt>: The buffer containing the
+  * @param[in,out] data const unsigned char*: The buffer containing the
   *                                                   packet to pad.
-  * @param len <tt>opus_int32</tt>: The size of the packet.
+  * @param len opus_int32: The size of the packet.
   *                                 This must be at least 1.
-  * @param new_len <tt>opus_int32</tt>: The desired size of the packet after padding.
+  * @param new_len opus_int32: The desired size of the packet after padding.
   *                                 This must be at least 1.
-  * @param nb_streams <tt>opus_int32</tt>: The number of streams (not channels) in the packet.
+  * @param nb_streams opus_int32: The number of streams (not channels) in the packet.
   *                                 This must be at least as large as len.
-  * @returns an error code
-  * @retval #OPUS_OK \a on success.
-  * @retval #OPUS_BAD_ARG \a len was less than 1.
-  * @retval #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
+  * @return   an error code OR #OPUS_OK \a on success. OR  #OPUS_BAD_ARG \a len was less than 1. OR #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
   */
         public static int PadMultistreamPacket(byte[] data, int data_offset, int len, int new_len, int nb_streams)
         {
@@ -507,16 +499,15 @@ namespace Concentus.Structs
         // FIXME THIS METHOD FAILS IN TEST_OPUS_ENCODE
         /** Remove all padding from a given Opus multi-stream packet and rewrite the TOC sequence to
   * minimize space usage.
-  * @param[in,out] data <tt>const unsigned char*</tt>: The buffer containing the
+  * @param[in,out] data const unsigned char*: The buffer containing the
   *                                                   packet to strip.
-  * @param len <tt>opus_int32</tt>: The size of the packet.
+  * @param len opus_int32: The size of the packet.
   *                                 This must be at least 1.
-  * @param nb_streams <tt>opus_int32</tt>: The number of streams (not channels) in the packet.
+  * @param nb_streams opus_int32: The number of streams (not channels) in the packet.
   *                                 This must be at least 1.
-  * @returns The new size of the output packet on success, or an error code
+  * @return The new size of the output packet on success, or an error code
   *          on failure.
-  * @retval #OPUS_BAD_ARG \a len was less than 1 or new_len was less than len.
-  * @retval #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
+  * @return  #OPUS_BAD_ARG \a len was less than 1 or new_len was less than len. OR #OPUS_INVALID_PACKET \a data did not contain a valid Opus packet.
   */
         public static int UnpadMultistreamPacket(byte[] data, int data_offset, int len, int nb_streams)
         {

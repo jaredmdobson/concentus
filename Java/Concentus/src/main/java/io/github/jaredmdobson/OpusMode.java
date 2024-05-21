@@ -37,7 +37,7 @@ package io.github.jaredmdobson;
 /**
  * <p>OpusMode class.</p>
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public enum OpusMode {

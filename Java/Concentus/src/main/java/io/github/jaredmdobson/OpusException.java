@@ -33,12 +33,17 @@ package io.github.jaredmdobson;
 /**
  * <p>OpusException class.</p>
  *
- * @author Jared M Dobson
- * @version $Id: $Id
+ * @version $Id : $Id
  */
 public class OpusException extends Exception {
 
+    /**
+     * error message
+     */
     private String _message;
+    /**
+     * error code
+     */
     private int _opus_error_code;
 
     /**
@@ -60,7 +65,7 @@ public class OpusException extends Exception {
     /**
      * <p>Constructor for OpusException.</p>
      *
-     * @param message a {@link java.lang.String} object
+     * @param message         a {@link java.lang.String} object
      * @param opus_error_code a int
      */
     public OpusException(String message, int opus_error_code) {

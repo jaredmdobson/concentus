@@ -48,7 +48,7 @@ package io.github.jaredmdobson;
  *  streams must be decoded with separate decoder states and can be decoded
  *  in parallel.
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public class OpusDecoder {

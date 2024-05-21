@@ -40,7 +40,7 @@ package io.github.jaredmdobson;
 /**
  * <p>OpusEncoder class.</p>
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public class OpusEncoder {

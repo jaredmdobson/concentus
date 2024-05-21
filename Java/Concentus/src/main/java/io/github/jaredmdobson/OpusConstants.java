@@ -37,7 +37,7 @@ package io.github.jaredmdobson;
 /**
  * <p>OpusConstants class.</p>
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public class OpusConstants {

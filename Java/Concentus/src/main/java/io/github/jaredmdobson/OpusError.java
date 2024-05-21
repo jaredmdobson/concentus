@@ -41,7 +41,7 @@ package io.github.jaredmdobson;
 /**
  * <p>OpusError class.</p>
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public class OpusError {

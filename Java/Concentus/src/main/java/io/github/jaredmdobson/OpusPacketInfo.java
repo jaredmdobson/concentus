@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * <p>OpusPacketInfo class.</p>
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public class OpusPacketInfo {

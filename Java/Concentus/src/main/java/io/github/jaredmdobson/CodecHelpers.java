@@ -37,7 +37,7 @@ package io.github.jaredmdobson;
 /**
  * <p>CodecHelpers class.</p>
  *
- * @author Jared M Dobson
+
  * @version $Id: $Id
  */
 public class CodecHelpers {
