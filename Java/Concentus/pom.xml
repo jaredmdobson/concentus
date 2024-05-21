@@ -18,6 +18,9 @@
     <scm>
         <url>https://github.com/jaredmdobson/concentus.git</url>
     </scm>
+    <url>
+        https://github.com/jaredmdobson/concentus
+    </url>
     <groupId>io.github.jaredmdobson</groupId>
     <artifactId>concentus</artifactId>
     <version>1.0.1</version>
