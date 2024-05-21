@@ -150,12 +150,12 @@ namespace Concentus.Structs
   * The state must be at least the size returned by opus_decoder_get_size().
   * This is intended for applications which use their own allocator instead of malloc. @see opus_decoder_create,opus_decoder_get_size
   * To reset a previously initialized state, use the #OPUS_RESET_STATE CTL.
-  * @param [in] st OpusDecoder*: Decoder state.
-  * @param [in] Fs opus_int32: Sampling rate to decode to (Hz).
+  * @param [in] st <tt>OpusDecoder*</tt>: Decoder state.
+  * @param [in] Fs <tt>opus_int32</tt>: Sampling rate to decode to (Hz).
   *                                     This must be one of 8000, 12000, 16000,
   *                                     24000, or 48000.
-  * @param [in] channels int: Number of channels (1 or 2) to decode
-  * @return #OPUS_OK Success or @ref opus_errorcodes
+  * @param [in] channels <tt>int</tt>: Number of channels (1 or 2) to decode
+  * @retval #OPUS_OK Success or @ref opus_errorcodes
   */
         internal int opus_decoder_init(int Fs, int channels)
         {
