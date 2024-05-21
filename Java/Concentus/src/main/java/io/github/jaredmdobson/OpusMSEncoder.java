@@ -34,6 +34,12 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusMSEncoder class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusMSEncoder {
 
     final ChannelLayout layout = new ChannelLayout();
@@ -62,6 +68,9 @@ public class OpusMSEncoder {
         preemph_mem = new int[nb_channels];
     }
 
+    /**
+     * <p>resetState.</p>
+     */
     public void resetState() {
         int s;
         subframe_mem[0] = subframe_mem[1] = subframe_mem[2] = 0;
@@ -391,6 +400,18 @@ public class OpusMSEncoder {
                 mapping, application, (channels > 2 && mapping_family == 1) ? 1 : 0);
     }
 
+    /**
+     * <p>Create.</p>
+     *
+     * @param Fs a int
+     * @param channels a int
+     * @param streams a int
+     * @param coupled_streams a int
+     * @param mapping an array of {@link short} objects
+     * @param application a {@link io.github.jaredmdobson.OpusApplication} object
+     * @return a {@link io.github.jaredmdobson.OpusMSEncoder} object
+     * @throws io.github.jaredmdobson.OpusException if any.
+     */
     public static OpusMSEncoder Create(
             int Fs,
             int channels,
@@ -438,6 +459,19 @@ public class OpusMSEncoder {
         }
     }
 
+    /**
+     * <p>CreateSurround.</p>
+     *
+     * @param Fs a int
+     * @param channels a int
+     * @param mapping_family a int
+     * @param streams a {@link io.github.jaredmdobson.BoxedValueInt} object
+     * @param coupled_streams a {@link io.github.jaredmdobson.BoxedValueInt} object
+     * @param mapping an array of {@link short} objects
+     * @param application a {@link io.github.jaredmdobson.OpusApplication} object
+     * @return a {@link io.github.jaredmdobson.OpusMSEncoder} object
+     * @throws io.github.jaredmdobson.OpusException if any.
+     */
     public static OpusMSEncoder CreateSurround(
             int Fs,
             int channels,
@@ -742,6 +776,17 @@ public class OpusMSEncoder {
         }
     }
 
+    /**
+     * <p>encodeMultistream.</p>
+     *
+     * @param pcm an array of {@link short} objects
+     * @param pcm_offset a int
+     * @param frame_size a int
+     * @param outputBuffer an array of {@link byte} objects
+     * @param outputBuffer_offset a int
+     * @param max_data_bytes a int
+     * @return a int
+     */
     public int encodeMultistream(
             short[] pcm,
             int pcm_offset,
@@ -754,6 +799,11 @@ public class OpusMSEncoder {
         return opus_multistream_encode_native(pcm, pcm_offset, frame_size, outputBuffer, outputBuffer_offset, max_data_bytes, 16, 0);
     }
 
+    /**
+     * <p>getBitrate.</p>
+     *
+     * @return a int
+     */
     public int getBitrate() {
         int s;
         int value = 0;
@@ -765,6 +815,11 @@ public class OpusMSEncoder {
         return value;
     }
 
+    /**
+     * <p>setBitrate.</p>
+     *
+     * @param value a int
+     */
     public void setBitrate(int value) {
         if (value < 0 && value != OpusConstants.OPUS_AUTO && value != OpusConstants.OPUS_BITRATE_MAX) {
             throw new IllegalArgumentException("Invalid bitrate");
@@ -772,134 +827,269 @@ public class OpusMSEncoder {
         bitrate_bps = value;
     }
 
+    /**
+     * <p>Getter for the field <code>application</code>.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusApplication} object
+     */
     public OpusApplication getApplication() {
         return encoders[0].getApplication();
     }
 
+    /**
+     * <p>Setter for the field <code>application</code>.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusApplication} object
+     */
     public void setApplication(OpusApplication value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setApplication(value);
         }
     }
 
+    /**
+     * <p>getForceChannels.</p>
+     *
+     * @return a int
+     */
     public int getForceChannels() {
         return encoders[0].getForceChannels();
     }
 
+    /**
+     * <p>setForceChannels.</p>
+     *
+     * @param value a int
+     */
     public void setForceChannels(int value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setForceChannels(value);
         }
     }
 
+    /**
+     * <p>getMaxBandwidth.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public OpusBandwidth getMaxBandwidth() {
         return encoders[0].getMaxBandwidth();
     }
 
+    /**
+     * <p>setMaxBandwidth.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public void setMaxBandwidth(OpusBandwidth value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setMaxBandwidth(value);
         }
     }
 
+    /**
+     * <p>getBandwidth.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public OpusBandwidth getBandwidth() {
         return encoders[0].getBandwidth();
     }
 
+    /**
+     * <p>setBandwidth.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public void setBandwidth(OpusBandwidth value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setBandwidth(value);
         }
     }
 
+    /**
+     * <p>getUseDTX.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseDTX() {
         return encoders[0].getUseDTX();
     }
 
+    /**
+     * <p>setUseDTX.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseDTX(boolean value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setUseDTX(value);
         }
     }
 
+    /**
+     * <p>getComplexity.</p>
+     *
+     * @return a int
+     */
     public int getComplexity() {
         return encoders[0].getComplexity();
     }
 
+    /**
+     * <p>setComplexity.</p>
+     *
+     * @param value a int
+     */
     public void setComplexity(int value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setComplexity(value);
         }
     }
 
+    /**
+     * <p>getForceMode.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusMode} object
+     */
     public OpusMode getForceMode() {
         return encoders[0].getForceMode();
     }
 
+    /**
+     * <p>setForceMode.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusMode} object
+     */
     public void setForceMode(OpusMode value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setForceMode(value);
         }
     }
 
+    /**
+     * <p>getUseInbandFEC.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseInbandFEC() {
         return encoders[0].getUseInbandFEC();
     }
 
+    /**
+     * <p>setUseInbandFEC.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseInbandFEC(boolean value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setUseInbandFEC(value);
         }
     }
 
+    /**
+     * <p>getPacketLossPercent.</p>
+     *
+     * @return a int
+     */
     public int getPacketLossPercent() {
         return encoders[0].getPacketLossPercent();
     }
 
+    /**
+     * <p>setPacketLossPercent.</p>
+     *
+     * @param value a int
+     */
     public void setPacketLossPercent(int value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setPacketLossPercent(value);
         }
     }
 
+    /**
+     * <p>getUseVBR.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseVBR() {
         return encoders[0].getUseVBR();
     }
 
+    /**
+     * <p>setUseVBR.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseVBR(boolean value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setUseVBR(value);
         }
     }
 
+    /**
+     * <p>getUseConstrainedVBR.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseConstrainedVBR() {
         return encoders[0].getUseConstrainedVBR();
     }
 
+    /**
+     * <p>setUseConstrainedVBR.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseConstrainedVBR(boolean value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setUseConstrainedVBR(value);
         }
     }
 
+    /**
+     * <p>getSignalType.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusSignal} object
+     */
     public OpusSignal getSignalType() {
         return encoders[0].getSignalType();
     }
 
+    /**
+     * <p>setSignalType.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusSignal} object
+     */
     public void setSignalType(OpusSignal value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setSignalType(value);
         }
     }
 
+    /**
+     * <p>getLookahead.</p>
+     *
+     * @return a int
+     */
     public int getLookahead() {
         return encoders[0].getLookahead();
     }
 
+    /**
+     * <p>getSampleRate.</p>
+     *
+     * @return a int
+     */
     public int getSampleRate() {
         return encoders[0].getSampleRate();
     }
 
+    /**
+     * <p>getFinalRange.</p>
+     *
+     * @return a int
+     */
     public int getFinalRange() {
         int s;
         int value = 0;
@@ -910,34 +1100,70 @@ public class OpusMSEncoder {
         return value;
     }
 
+    /**
+     * <p>getLSBDepth.</p>
+     *
+     * @return a int
+     */
     public int getLSBDepth() {
         return encoders[0].getLSBDepth();
     }
 
+    /**
+     * <p>setLSBDepth.</p>
+     *
+     * @param value a int
+     */
     public void setLSBDepth(int value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setLSBDepth(value);
         }
     }
 
+    /**
+     * <p>getPredictionDisabled.</p>
+     *
+     * @return a boolean
+     */
     public boolean getPredictionDisabled() {
         return encoders[0].getPredictionDisabled();
     }
 
+    /**
+     * <p>setPredictionDisabled.</p>
+     *
+     * @param value a boolean
+     */
     public void setPredictionDisabled(boolean value) {
         for (int encoder_ptr = 0; encoder_ptr < layout.nb_streams; encoder_ptr++) {
             encoders[encoder_ptr].setPredictionDisabled(value);
         }
     }
 
+    /**
+     * <p>getExpertFrameDuration.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusFramesize} object
+     */
     public OpusFramesize getExpertFrameDuration() {
         return variable_duration;
     }
 
+    /**
+     * <p>setExpertFrameDuration.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusFramesize} object
+     */
     public void setExpertFrameDuration(OpusFramesize value) {
         variable_duration = value;
     }
 
+    /**
+     * <p>getMultistreamEncoderState.</p>
+     *
+     * @param streamId a int
+     * @return a {@link io.github.jaredmdobson.OpusEncoder} object
+     */
     public OpusEncoder getMultistreamEncoderState(int streamId) {
         if (streamId >= layout.nb_streams) {
             throw new IllegalArgumentException("Requested stream doesn't exist");

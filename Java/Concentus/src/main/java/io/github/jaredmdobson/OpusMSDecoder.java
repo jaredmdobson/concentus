@@ -34,6 +34,12 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusMSDecoder class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusMSDecoder {
 
     ChannelLayout layout = new ChannelLayout();
@@ -98,6 +104,17 @@ public class OpusMSDecoder {
     /// <param name="coupled_streams"></param>
     /// <param name="mapping">A mapping family (just use { 0, 1, 255 })</param>
     /// <returns></returns>
+    /**
+     * <p>create.</p>
+     *
+     * @param Fs a int
+     * @param channels a int
+     * @param streams a int
+     * @param coupled_streams a int
+     * @param mapping an array of {@link short} objects
+     * @return a {@link io.github.jaredmdobson.OpusMSDecoder} object
+     * @throws io.github.jaredmdobson.OpusException if any.
+     */
     public static OpusMSDecoder create(
             int Fs,
             int channels,
@@ -273,6 +290,18 @@ public class OpusMSDecoder {
         }
     }
 
+    /**
+     * <p>decodeMultistream.</p>
+     *
+     * @param data an array of {@link byte} objects
+     * @param data_offset a int
+     * @param len a int
+     * @param out_pcm an array of {@link short} objects
+     * @param out_pcm_offset a int
+     * @param frame_size a int
+     * @param decode_fec a int
+     * @return a int
+     */
     public int decodeMultistream(
             byte[] data,
             int data_offset,
@@ -286,6 +315,11 @@ public class OpusMSDecoder {
                 out_pcm, out_pcm_offset, frame_size, decode_fec, 0);
     }
 
+    /**
+     * <p>getBandwidth.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public OpusBandwidth getBandwidth() {
         if (decoders == null || decoders.length == 0) {
             throw new IllegalStateException("Decoder not initialized");
@@ -293,6 +327,11 @@ public class OpusMSDecoder {
         return decoders[0].getBandwidth();
     }
 
+    /**
+     * <p>getSampleRate.</p>
+     *
+     * @return a int
+     */
     public int getSampleRate() {
         if (decoders == null || decoders.length == 0) {
             throw new IllegalStateException("Decoder not initialized");
@@ -300,6 +339,11 @@ public class OpusMSDecoder {
         return decoders[0].getSampleRate();
     }
 
+    /**
+     * <p>getGain.</p>
+     *
+     * @return a int
+     */
     public int getGain() {
         if (decoders == null || decoders.length == 0) {
             throw new IllegalStateException("Decoder not initialized");
@@ -307,12 +351,22 @@ public class OpusMSDecoder {
         return decoders[0].getGain();
     }
 
+    /**
+     * <p>setGain.</p>
+     *
+     * @param value a int
+     */
     public void setGain(int value) {
         for (int s = 0; s < layout.nb_streams; s++) {
             decoders[s].setGain(value);
         }
     }
 
+    /**
+     * <p>getLastPacketDuration.</p>
+     *
+     * @return a int
+     */
     public int getLastPacketDuration() {
         if (decoders == null || decoders.length == 0) {
             return OpusError.OPUS_INVALID_STATE;
@@ -320,6 +374,11 @@ public class OpusMSDecoder {
         return decoders[0].getLastPacketDuration();
     }
 
+    /**
+     * <p>getFinalRange.</p>
+     *
+     * @return a int
+     */
     public int getFinalRange() {
         int value = 0;
         for (int s = 0; s < layout.nb_streams; s++) {
@@ -328,12 +387,21 @@ public class OpusMSDecoder {
         return value;
     }
 
+    /**
+     * <p>ResetState.</p>
+     */
     public void ResetState() {
         for (int s = 0; s < layout.nb_streams; s++) {
             decoders[s].resetState();
         }
     }
 
+    /**
+     * <p>GetMultistreamDecoderState.</p>
+     *
+     * @param streamId a int
+     * @return a {@link io.github.jaredmdobson.OpusDecoder} object
+     */
     public OpusDecoder GetMultistreamDecoderState(int streamId) {
         return decoders[streamId];
     }

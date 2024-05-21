@@ -33,7 +33,10 @@ package io.github.jaredmdobson;
 
 class DecoderAPIFlag {
 
+    /** Constant <code>FLAG_DECODE_NORMAL=0</code> */
     public static final int FLAG_DECODE_NORMAL = 0;
+    /** Constant <code>FLAG_PACKET_LOST=1</code> */
     public static final int FLAG_PACKET_LOST = 1;
+    /** Constant <code>FLAG_DECODE_LBRR=2</code> */
     public static final int FLAG_DECODE_LBRR = 2;
 }

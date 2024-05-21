@@ -975,7 +975,9 @@ class SilkTables {
                 {-46, 425, -1375, 2996},};
 
     /* Tables for 2x downsampler */
+    /** Constant <code>silk_resampler_down2_0=9872</code> */
     public static final short silk_resampler_down2_0 = 9872;
+    /** Constant <code>silk_resampler_down2_1=39809 - 65536</code> */
     public static final short silk_resampler_down2_1 = 39809 - 65536;
 
     /* Tables for 2x upsampler, high quality */

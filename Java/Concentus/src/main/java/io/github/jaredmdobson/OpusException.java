@@ -30,24 +30,45 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusException class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusException extends Exception {
 
     private String _message;
     private int _opus_error_code;
 
+    /**
+     * <p>Constructor for OpusException.</p>
+     */
     public OpusException() {
         this("", 0);
     }
 
+    /**
+     * <p>Constructor for OpusException.</p>
+     *
+     * @param message a {@link java.lang.String} object
+     */
     public OpusException(String message) {
         this(message, 1);
     }
 
+    /**
+     * <p>Constructor for OpusException.</p>
+     *
+     * @param message a {@link java.lang.String} object
+     * @param opus_error_code a int
+     */
     public OpusException(String message, int opus_error_code) {
         _message = message + ": " + CodecHelpers.opus_strerror(opus_error_code);
         _opus_error_code = opus_error_code;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getMessage() {
         return _message;

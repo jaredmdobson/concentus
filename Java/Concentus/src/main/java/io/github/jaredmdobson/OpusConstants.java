@@ -34,26 +34,41 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusConstants class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusConstants {
 
     /// <summary>
     /// Auto/default setting
     /// </summary>
+    /** Constant <code>OPUS_AUTO=-1000</code> */
     public static final int OPUS_AUTO = -1000;
 
     /// <summary>
     /// Maximum bitrate
     /// </summary>
+    /** Constant <code>OPUS_BITRATE_MAX=-1</code> */
     public static final int OPUS_BITRATE_MAX = -1;
 
     // from analysis.c
+    /** Constant <code>NB_FRAMES=8</code> */
     public static final int NB_FRAMES = 8;
+    /** Constant <code>NB_TBANDS=18</code> */
     public static final int NB_TBANDS = 18;
+    /** Constant <code>NB_TOT_BANDS=21</code> */
     public static final int NB_TOT_BANDS = 21;
+    /** Constant <code>NB_TONAL_SKIP_BANDS=9</code> */
     public static final int NB_TONAL_SKIP_BANDS = 9;
+    /** Constant <code>ANALYSIS_BUF_SIZE=720</code> */
     public static final int ANALYSIS_BUF_SIZE = 720;
     /* 15 ms at 48 kHz */
+    /** Constant <code>DETECT_SIZE=200</code> */
     public static final int DETECT_SIZE = 200;
 
+    /** Constant <code>MAX_ENCODER_BUFFER=480</code> */
     public static final int MAX_ENCODER_BUFFER = 480;
 }

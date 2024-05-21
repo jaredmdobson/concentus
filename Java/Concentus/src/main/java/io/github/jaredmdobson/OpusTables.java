@@ -269,7 +269,9 @@ class OpusTables {
         30000, 2000, /* SWB<->FB */};
 
     /* Threshold bit-rates for switching between mono and stereo */
+    /** Constant <code>stereo_voice_threshold=30000</code> */
     public static final int stereo_voice_threshold = 30000;
+    /** Constant <code>stereo_music_threshold=30000</code> */
     public static final int stereo_music_threshold = 30000;
 
     /* Threshold bit-rate for switching between SILK/hybrid and CELT-only */

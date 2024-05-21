@@ -36,55 +36,80 @@ package io.github.jaredmdobson;
 
 class CeltConstants {
 
+    /** Constant <code>Q15ONE=32767</code> */
     public static final int Q15ONE = 32767;
 
+    /** Constant <code>CELT_SIG_SCALE=32768.0f</code> */
     public static final float CELT_SIG_SCALE = 32768.0f;
 
+    /** Constant <code>SIG_SHIFT=12</code> */
     public static final int SIG_SHIFT = 12;
 
+    /** Constant <code>NORM_SCALING=16384</code> */
     public static final int NORM_SCALING = 16384;
 
+    /** Constant <code>DB_SHIFT=10</code> */
     public static final int DB_SHIFT = 10;
 
+    /** Constant <code>EPSILON=1</code> */
     public static final int EPSILON = 1;
+    /** Constant <code>VERY_SMALL=0</code> */
     public static final int VERY_SMALL = 0;
+    /** Constant <code>VERY_LARGE16=((short) 32767)</code> */
     public static final short VERY_LARGE16 = ((short) 32767);
+    /** Constant <code>Q15_ONE=((short) 32767)</code> */
     public static final short Q15_ONE = ((short) 32767);
 
+    /** Constant <code>COMBFILTER_MAXPERIOD=1024</code> */
     public static final int COMBFILTER_MAXPERIOD = 1024;
+    /** Constant <code>COMBFILTER_MINPERIOD=15</code> */
     public static final int COMBFILTER_MINPERIOD = 15;
 
     // from opus_decode.c
+    /** Constant <code>DECODE_BUFFER_SIZE=2048</code> */
     public static final int DECODE_BUFFER_SIZE = 2048;
 
     // from modes.c
     /* Alternate tuning (partially derived from Vorbis) */
+    /** Constant <code>BITALLOC_SIZE=11</code> */
     public static final int BITALLOC_SIZE = 11;
+    /** Constant <code>MAX_PERIOD=1024</code> */
     public static final int MAX_PERIOD = 1024;
 
     // from static_modes_float.h
+    /** Constant <code>TOTAL_MODES=1</code> */
     public static final int TOTAL_MODES = 1;
 
     // from rate.h
+    /** Constant <code>MAX_PSEUDO=40</code> */
     public static final int MAX_PSEUDO = 40;
+    /** Constant <code>LOG_MAX_PSEUDO=6</code> */
     public static final int LOG_MAX_PSEUDO = 6;
 
+    /** Constant <code>CELT_MAX_PULSES=128</code> */
     public static final int CELT_MAX_PULSES = 128;
 
+    /** Constant <code>MAX_FINE_BITS=8</code> */
     public static final int MAX_FINE_BITS = 8;
 
+    /** Constant <code>FINE_OFFSET=21</code> */
     public static final int FINE_OFFSET = 21;
+    /** Constant <code>QTHETA_OFFSET=4</code> */
     public static final int QTHETA_OFFSET = 4;
+    /** Constant <code>QTHETA_OFFSET_TWOPHASE=16</code> */
     public static final int QTHETA_OFFSET_TWOPHASE = 16;
 
     /* The maximum pitch lag to allow in the pitch-based PLC. It's possible to save
 CPU time in the PLC pitch search by making this smaller than MAX_PERIOD. The
 current value corresponds to a pitch of 66.67 Hz. */
+    /** Constant <code>PLC_PITCH_LAG_MAX=720</code> */
     public static final int PLC_PITCH_LAG_MAX = 720;
 
     /* The minimum pitch lag to allow in the pitch-based PLC. This corresponds to a
        pitch of 480 Hz. */
+    /** Constant <code>PLC_PITCH_LAG_MIN=100</code> */
     public static final int PLC_PITCH_LAG_MIN = 100;
 
+    /** Constant <code>LPC_ORDER=24</code> */
     public static final int LPC_ORDER = 24;
 }

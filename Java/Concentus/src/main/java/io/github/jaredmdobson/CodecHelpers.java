@@ -34,6 +34,12 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>CodecHelpers class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class CodecHelpers {
 
     static byte gen_toc(OpusMode mode, int framerate, OpusBandwidth bandwidth, int channels) {
@@ -607,6 +613,12 @@ public class CodecHelpers {
     //        declip_mem[c] = a;
     //    }
     //}
+    /**
+     * <p>opus_strerror.</p>
+     *
+     * @param error a int
+     * @return a {@link java.lang.String} object
+     */
     public static String opus_strerror(int error) {
         String[] error_strings = {
             "success",
@@ -625,6 +637,11 @@ public class CodecHelpers {
         }
     }
 
+    /**
+     * <p>GetVersionString.</p>
+     *
+     * @return a {@link java.lang.String} object
+     */
     public static String GetVersionString() {
         return "concentus 1.0a-java-fixed";
     }

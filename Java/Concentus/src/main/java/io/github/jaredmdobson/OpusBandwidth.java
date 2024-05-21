@@ -34,6 +34,12 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusBandwidth class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public enum OpusBandwidth {
     OPUS_BANDWIDTH_UNKNOWN,
     OPUS_BANDWIDTH_AUTO,

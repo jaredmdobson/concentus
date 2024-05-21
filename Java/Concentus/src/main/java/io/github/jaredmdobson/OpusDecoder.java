@@ -36,17 +36,20 @@ package io.github.jaredmdobson;
 
 /**
  * The Opus decoder structure.
- * 
+ *
  * Opus is a stateful codec with overlapping blocks and as a result Opus
  *  packets are not coded independently of each other. Packets must be
  *  passed into the decoder serially and in the correct order for a correct
  *  decode. Lost packets can be replaced with loss concealment by calling
  *  the decoder with a null reference and zero length for the missing packet.
- * 
+ *
  * A single codec state may only be accessed from a single thread at
  *  a time and any required locking must be performed by the caller. Separate
  *  streams must be decoded with separate decoder states and can be decoded
  *  in parallel.
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
  */
 public class OpusDecoder {
 
@@ -153,7 +156,7 @@ public class OpusDecoder {
      * @param Fs Sample rate to decode at (Hz). This must be one of 8000, 12000,
      * 16000, 24000, or 48000.
      * @param channels Number of channels (1 or 2) to decode.
-     * @throws OpusException
+     * @throws io.github.jaredmdobson.OpusException
      */
     public OpusDecoder(int Fs, int channels) throws OpusException {
         int ret;
@@ -662,6 +665,7 @@ public class OpusDecoder {
     /// <returns>The number of decoded samples</returns>
     /**
      * Decodes an Opus packet.
+     *
      * @param in_data The input payload. This may be NULL if that previous packet was lost in transit (when PLC is enabled)
      * @param in_data_offset The offset to use when reading the input payload. Usually 0
      * @param len The number of bytes in the payload (the packet size)
@@ -679,7 +683,7 @@ public class OpusDecoder {
      * available in this packet, the decoder will simply generate a best-effort recreation of the lost packet. In that case,
      * the length of frame_size must be EXACTLY the length of the audio that was lost, or else the decoder will be in an inconsistent state.
      * @return The number of decoded samples (per channel)
-     * @throws OpusException 
+     * @throws io.github.jaredmdobson.OpusException
      */
     public int decode(byte[] in_data, int in_data_offset,
             int len, short[] out_pcm, int out_pcm_offset, int frame_size, boolean decode_fec) throws OpusException {
@@ -707,6 +711,7 @@ public class OpusDecoder {
 
     /**
      * Decodes an Opus packet.
+     *
      * @param in_data The input payload. This may be NULL if that previous packet was lost in transit (when PLC is enabled)
      * @param in_data_offset The offset to use when reading the input payload. Usually 0
      * @param len The number of bytes in the payload (the packet size)
@@ -724,7 +729,7 @@ public class OpusDecoder {
      * available in this packet, the decoder will simply generate a best-effort recreation of the lost packet. In that case, the
      * length of frame_size must be EXACTLY the length of the audio that was lost, or else the decoder will be in an inconsistent state.
      * @return The number of decoded samples (per channel)
-     * @throws OpusException 
+     * @throws io.github.jaredmdobson.OpusException
      */
     public int decode(byte[] in_data, int in_data_offset, int len, byte[] out_pcm,
     		int out_pcm_offset, int frame_size, boolean decode_fec) throws OpusException {
@@ -738,18 +743,38 @@ public class OpusDecoder {
     	return decSamples;
     }
 
+    /**
+     * <p>Getter for the field <code>bandwidth</code>.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public OpusBandwidth getBandwidth() {
         return bandwidth;
     }
 
+    /**
+     * <p>getFinalRange.</p>
+     *
+     * @return a int
+     */
     public int getFinalRange() {
         return rangeFinal;
     }
 
+    /**
+     * <p>getSampleRate.</p>
+     *
+     * @return a int
+     */
     public int getSampleRate() {
         return Fs;
     }
 
+    /**
+     * <p>getPitch.</p>
+     *
+     * @return a int
+     */
     public int getPitch() {
         if (prev_mode == OpusMode.MODE_CELT_ONLY) {
             return Celt_Decoder.GetPitch();
@@ -758,10 +783,20 @@ public class OpusDecoder {
         }
     }
 
+    /**
+     * <p>getGain.</p>
+     *
+     * @return a int
+     */
     public int getGain() {
         return decode_gain;
     }
 
+    /**
+     * <p>setGain.</p>
+     *
+     * @param value a int
+     */
     public void setGain(int value) {
         if (value < -32768 || value > 32767) {
             throw new IllegalArgumentException("Gain must be within the range of a signed int16");
@@ -770,10 +805,18 @@ public class OpusDecoder {
         decode_gain = value;
     }
 
+    /**
+     * <p>getLastPacketDuration.</p>
+     *
+     * @return a int
+     */
     public int getLastPacketDuration() {
         return last_packet_duration;
     }
 
+    /**
+     * <p>resetState.</p>
+     */
     public void resetState() {
         partialReset();
         Celt_Decoder.ResetState();

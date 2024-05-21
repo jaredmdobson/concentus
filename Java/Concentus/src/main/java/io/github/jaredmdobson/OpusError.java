@@ -38,6 +38,12 @@ package io.github.jaredmdobson;
 /// Note that since most API-level errors are detected and thrown as
 /// OpusExceptions, direct use of this class is not usually needed
 /// </summary>
+/**
+ * <p>OpusError class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusError {
 
     /**

@@ -808,22 +808,47 @@ class CeltDecoder {
         return returnVal;
     }
 
+    /**
+     * <p>GetLookahead.</p>
+     *
+     * @return a int
+     */
     public int GetLookahead() {
         return this.overlap / this.downsample;
     }
 
+    /**
+     * <p>GetPitch.</p>
+     *
+     * @return a int
+     */
     public int GetPitch() {
         return this.postfilter_period;
     }
 
+    /**
+     * <p>GetMode.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.CeltMode} object
+     */
     public CeltMode GetMode() {
         return this.mode;
     }
 
+    /**
+     * <p>SetSignalling.</p>
+     *
+     * @param value a int
+     */
     public void SetSignalling(int value) {
         this.signalling = value;
     }
 
+    /**
+     * <p>GetFinalRange.</p>
+     *
+     * @return a int
+     */
     public int GetFinalRange() {
         return this.rng;
     }

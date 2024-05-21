@@ -37,6 +37,12 @@ package io.github.jaredmdobson;
 /// <summary>
 /// The Opus encoder structure
 /// </summary>
+/**
+ * <p>OpusEncoder class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusEncoder {
 
     final EncControlState silk_mode = new EncControlState();
@@ -138,6 +144,9 @@ public class OpusEncoder {
         //CeltEncoder.Reset();
     }
 
+    /**
+     * <p>resetState.</p>
+     */
     public void resetState() {
         EncControlState dummy = new EncControlState();
         analysis.Reset();
@@ -183,7 +192,7 @@ public class OpusEncoder {
      * disables the speech-optimized mode in exchange for slightly reduced
      * delay. This mode can only be set on an newly initialized or freshly reset
      * encoder because it changes the codec delay.
-     * @throws OpusException
+     * @throws io.github.jaredmdobson.OpusException
      */
     public OpusEncoder(int Fs, int channels, OpusApplication application) throws OpusException {
         int ret;
@@ -1273,6 +1282,7 @@ public class OpusEncoder {
 
     /**
      * Encodes an Opus frame, putting the output into a specified data buffer
+     *
      * @param in_pcm 16-bit input signal (Interleaved if stereo), in a short array. Length should be at least frame_size * channels
      * @param pcm_offset Offset to use when reading the in_pcm buffer
      * @param frame_size The number of samples _per channel_ in the inpus signal. The frame size must be a valid Opus framesize for the given sample rate.
@@ -1283,7 +1293,7 @@ public class OpusEncoder {
      * @param max_data_bytes The maximum amount of space allocated for the output payload. This may be used to impose
      * an upper limit on the instant bitrate, but should not be used as the only bitrate control (use setBitrate for that)
      * @return The length of the encoded packet, in bytes
-     * @throws OpusException 
+     * @throws io.github.jaredmdobson.OpusException
      */
     public int encode(short[] in_pcm, int pcm_offset, int frame_size,
             byte[] out_data, int out_data_offset, int max_data_bytes) throws OpusException {
@@ -1328,6 +1338,7 @@ public class OpusEncoder {
 
     /**
      * Encodes an Opus frame, putting the output into a specified data buffer
+     *
      * @param in_pcm 16-bit input signal (Interleaved if stereo), in a little endian byte array. Length should be at least frame_size * channels * 2
      * @param pcm_offset Offset to use when reading the in_pcm buffer
      * @param frame_size The number of samples _per channel_ in the inpus signal. The frame size must be a valid Opus framesize for the given sample rate.
@@ -1338,7 +1349,7 @@ public class OpusEncoder {
      * @param max_data_bytes The maximum amount of space allocated for the output payload. This may be used to impose
      * an upper limit on the instant bitrate, but should not be used as the only bitrate control (use setBitrate for that)
      * @return The length of the encoded packet, in bytes
-     * @throws OpusException 
+     * @throws io.github.jaredmdobson.OpusException
      */
     public int encode(byte[] in_pcm, int pcm_offset, int frame_size,
             byte[] out_data, int out_data_offset, int max_data_bytes) throws OpusException {
@@ -1355,10 +1366,20 @@ public class OpusEncoder {
     /// to the encoder what type of details we want to preserve in the encoding.
     /// This cannot be changed after the encoder has started
     /// </summary>
+    /**
+     * <p>Getter for the field <code>application</code>.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusApplication} object
+     */
     public OpusApplication getApplication() {
         return application;
     }
 
+    /**
+     * <p>Setter for the field <code>application</code>.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusApplication} object
+     */
     public void setApplication(OpusApplication value) {
         if (first == 0 && application != value) {
             throw new IllegalArgumentException("Application cannot be changed after encoding has started");
@@ -1369,10 +1390,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets the bitrate for encoder, in bits per second. Valid bitrates are be between 6K (6144) and 510K (522240)
     /// </summary>
+    /**
+     * <p>getBitrate.</p>
+     *
+     * @return a int
+     */
     public int getBitrate() {
         return user_bitrate_to_bitrate(prev_framesize, 1276);
     }
 
+    /**
+     * <p>setBitrate.</p>
+     *
+     * @param value a int
+     */
     public void setBitrate(int value) {
         if (value != OpusConstants.OPUS_AUTO && value != OpusConstants.OPUS_BITRATE_MAX) {
             if (value <= 0) {
@@ -1391,10 +1422,20 @@ public class OpusEncoder {
     /// Gets or sets the maximum number of channels to be encoded. This can be used to force a downmix from stereo to mono if stereo
     /// separation is not important
     /// </summary>
+    /**
+     * <p>getForceChannels.</p>
+     *
+     * @return a int
+     */
     public int getForceChannels() {
         return force_channels;
     }
 
+    /**
+     * <p>setForceChannels.</p>
+     *
+     * @param value a int
+     */
     public void setForceChannels(int value) {
         if ((value < 1 || value > channels) && value != OpusConstants.OPUS_AUTO) {
             throw new IllegalArgumentException("Force channels must be <= num. of channels");
@@ -1406,10 +1447,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets the maximum bandwidth to be used by the encoder.
     /// </summary>
+    /**
+     * <p>getMaxBandwidth.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public OpusBandwidth getMaxBandwidth() {
         return max_bandwidth;
     }
 
+    /**
+     * <p>setMaxBandwidth.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public void setMaxBandwidth(OpusBandwidth value) {
         max_bandwidth = value;
         if (max_bandwidth == OpusBandwidth.OPUS_BANDWIDTH_NARROWBAND) {
@@ -1424,10 +1475,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets the "preferred" encoded bandwidth
     /// </summary>
+    /**
+     * <p>Getter for the field <code>bandwidth</code>.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public OpusBandwidth getBandwidth() {
         return bandwidth;
     }
 
+    /**
+     * <p>Setter for the field <code>bandwidth</code>.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public void setBandwidth(OpusBandwidth value) {
         user_bandwidth = value;
         if (user_bandwidth == OpusBandwidth.OPUS_BANDWIDTH_NARROWBAND) {
@@ -1444,10 +1505,20 @@ public class OpusEncoder {
     /// (Bitrate &lt; 40Kbit/s and/or ForceMode == SILK). When enabled, the encoder detects silence and background noise
     /// and reduces the number of output packets, with up to 600ms in between separate packet transmissions.
     /// </summary>
+    /**
+     * <p>getUseDTX.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseDTX() {
         return silk_mode.useDTX != 0;
     }
 
+    /**
+     * <p>setUseDTX.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseDTX(boolean value) {
         silk_mode.useDTX = value ? 1 : 0;
     }
@@ -1455,10 +1526,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets the encoder complexity, between 0 and 10
     /// </summary>
+    /**
+     * <p>getComplexity.</p>
+     *
+     * @return a int
+     */
     public int getComplexity() {
         return silk_mode.complexity;
     }
 
+    /**
+     * <p>setComplexity.</p>
+     *
+     * @param value a int
+     */
     public void setComplexity(int value) {
         if (value < 0 || value > 10) {
             throw new IllegalArgumentException("Complexity must be between 0 and 10");
@@ -1472,10 +1553,20 @@ public class OpusEncoder {
     /// (Bitrate &lt; 40Kbit/s and/or ForceMode == SILK). When enabled, lost packets can be partially recovered
     /// by decoding data stored in the following packet.
     /// </summary>
+    /**
+     * <p>getUseInbandFEC.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseInbandFEC() {
         return silk_mode.useInBandFEC != 0;
     }
 
+    /**
+     * <p>setUseInbandFEC.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseInbandFEC(boolean value) {
         silk_mode.useInBandFEC = value ? 1 : 0;
     }
@@ -1484,10 +1575,20 @@ public class OpusEncoder {
     /// Gets or sets the expected amount of packet loss in the transmission medium, from 0 to 100.
     /// Only applies if UseInbandFEC is also enabled, and the encoder is in SILK mode.
     /// </summary>
+    /**
+     * <p>getPacketLossPercent.</p>
+     *
+     * @return a int
+     */
     public int getPacketLossPercent() {
         return silk_mode.packetLossPercentage;
     }
 
+    /**
+     * <p>setPacketLossPercent.</p>
+     *
+     * @param value a int
+     */
     public void setPacketLossPercent(int value) {
         if (value < 0 || value > 100) {
             throw new IllegalArgumentException("Packet loss must be between 0 and 100");
@@ -1500,10 +1601,20 @@ public class OpusEncoder {
     /// Gets or sets a flag to enable Variable Bitrate encoding. This is recommended as it generally improves audio quality
     /// with little impact on average bitrate
     /// </summary>
+    /**
+     * <p>getUseVBR.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseVBR() {
         return use_vbr != 0;
     }
 
+    /**
+     * <p>setUseVBR.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseVBR(boolean value) {
         use_vbr = value ? 1 : 0;
         silk_mode.useCBR = value ? 0 : 1;
@@ -1512,10 +1623,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets a flag to enable constrained VBR. This only applies when the encoder is in CELT mode (i.e. high bitrates)
     /// </summary>
+    /**
+     * <p>getUseConstrainedVBR.</p>
+     *
+     * @return a boolean
+     */
     public boolean getUseConstrainedVBR() {
         return vbr_constraint != 0;
     }
 
+    /**
+     * <p>setUseConstrainedVBR.</p>
+     *
+     * @param value a boolean
+     */
     public void setUseConstrainedVBR(boolean value) {
         vbr_constraint = value ? 1 : 0;
     }
@@ -1523,10 +1644,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets a hint to the encoder for what type of audio is being processed, voice or music 
     /// </summary>
+    /**
+     * <p>getSignalType.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusSignal} object
+     */
     public OpusSignal getSignalType() {
         return signal_type;
     }
 
+    /**
+     * <p>setSignalType.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusSignal} object
+     */
     public void setSignalType(OpusSignal value) {
         signal_type = value;
     }
@@ -1534,6 +1665,11 @@ public class OpusEncoder {
     /// <summary>
     /// Gets the number of samples of audio that are being stored in a buffer and are therefore contributing to latency.
     /// </summary>
+    /**
+     * <p>getLookahead.</p>
+     *
+     * @return a int
+     */
     public int getLookahead() {
         int returnVal = Fs / 400;
         if (application != OpusApplication.OPUS_APPLICATION_RESTRICTED_LOWDELAY) {
@@ -1546,10 +1682,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets the encoder's input sample rate.
     /// </summary>
+    /**
+     * <p>getSampleRate.</p>
+     *
+     * @return a int
+     */
     public int getSampleRate() {
         return Fs;
     }
 
+    /**
+     * <p>getFinalRange.</p>
+     *
+     * @return a int
+     */
     public int getFinalRange() {
         return rangeFinal;
     }
@@ -1558,10 +1704,20 @@ public class OpusEncoder {
     /// Gets or sets the bit resolution of the input audio signal. Though the encoder always uses 16-bit internally, this can help
     /// it make better decisions about bandwidth and cutoff values
     /// </summary>
+    /**
+     * <p>getLSBDepth.</p>
+     *
+     * @return a int
+     */
     public int getLSBDepth() {
         return lsb_depth;
     }
 
+    /**
+     * <p>setLSBDepth.</p>
+     *
+     * @param value a int
+     */
     public void setLSBDepth(int value) {
         if (value < 8 || value > 24) {
             throw new IllegalArgumentException("LSB depth must be between 8 and 24");
@@ -1574,10 +1730,20 @@ public class OpusEncoder {
     /// Gets or sets a fixed length for each encoded frame. Typically, the encoder just chooses a frame duration based on the input length
     /// and the current mode. This can be used to enforce an exact length if it is required by your application (e.g. monotonous transmission)
     /// </summary>
+    /**
+     * <p>getExpertFrameDuration.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusFramesize} object
+     */
     public OpusFramesize getExpertFrameDuration() {
         return variable_duration;
     }
 
+    /**
+     * <p>setExpertFrameDuration.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusFramesize} object
+     */
     public void setExpertFrameDuration(OpusFramesize value) {
         variable_duration = value;
         Celt_Encoder.SetExpertFrameDuration(value);
@@ -1589,10 +1755,20 @@ public class OpusEncoder {
     /// Hybrid is used to create a smooth transition between the two modes. Note that this value may not always be honored due to other factors such
     /// as frame size and bitrate.
     /// </summary>
+    /**
+     * <p>getForceMode.</p>
+     *
+     * @return a {@link io.github.jaredmdobson.OpusMode} object
+     */
     public OpusMode getForceMode() {
         return user_forced_mode;
     }
 
+    /**
+     * <p>setForceMode.</p>
+     *
+     * @param value a {@link io.github.jaredmdobson.OpusMode} object
+     */
     public void setForceMode(OpusMode value) {
         user_forced_mode = value;
     }
@@ -1600,10 +1776,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets a value indicating that this stream is a low-frequency channel. This is used when encoding 5.1 surround audio.
     /// </summary>
+    /**
+     * <p>getIsLFE.</p>
+     *
+     * @return a boolean
+     */
     public boolean getIsLFE() {
         return lfe != 0;
     }
 
+    /**
+     * <p>setIsLFE.</p>
+     *
+     * @param value a boolean
+     */
     public void setIsLFE(boolean value) {
         lfe = value ? 1 : 0;
         Celt_Encoder.SetLFE(value ? 1 : 0);
@@ -1612,10 +1798,20 @@ public class OpusEncoder {
     /// <summary>
     /// Gets or sets a flag to enable prediction, which does something.
     /// </summary>
+    /**
+     * <p>getPredictionDisabled.</p>
+     *
+     * @return a boolean
+     */
     public boolean getPredictionDisabled() {
         return silk_mode.reducedDependency != 0;
     }
 
+    /**
+     * <p>setPredictionDisabled.</p>
+     *
+     * @param value a boolean
+     */
     public void setPredictionDisabled(boolean value) {
         silk_mode.reducedDependency = value ? 1 : 0;
     }
@@ -1624,10 +1820,20 @@ public class OpusEncoder {
     /// Gets or sets a value indicating whether neural net analysis functions should be enabled, increasing encode quality
     /// at the expense of speed.
     /// </summary>
+    /**
+     * <p>getEnableAnalysis.</p>
+     *
+     * @return a boolean
+     */
     public boolean getEnableAnalysis() {
         return analysis.enabled;
     }
 
+    /**
+     * <p>setEnableAnalysis.</p>
+     *
+     * @param value a boolean
+     */
     public void setEnableAnalysis(boolean value) {
         analysis.enabled = value;
     }

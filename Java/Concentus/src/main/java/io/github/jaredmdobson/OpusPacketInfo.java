@@ -37,6 +37,12 @@ package io.github.jaredmdobson;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>OpusPacketInfo class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public class OpusPacketInfo {
 
     /**
@@ -64,11 +70,12 @@ public class OpusPacketInfo {
      * Parse an opus packet into a packetinfo object containing one or more frames.
      * Opus_decode will perform this operation internally so most applications do
      * not need to use this function.
+     *
      * @param packet The packet data to be parsed
      * @param packet_offset The index of the beginning of the packet in the data array (usually 0)
      * @param len The packet's length
      * @return A parsed packet info struct
-     * @throws OpusException 
+     * @throws io.github.jaredmdobson.OpusException
      */
     public static OpusPacketInfo parseOpusPacket(byte[] packet, int packet_offset, int len) throws OpusException {
         // Find the number of frames first
@@ -99,6 +106,14 @@ public class OpusPacketInfo {
         return new OpusPacketInfo(out_toc.Val, copiedFrames, payload_offset.Val);
     }
 
+    /**
+     * <p>getNumSamplesPerFrame.</p>
+     *
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @param Fs a int
+     * @return a int
+     */
     public static int getNumSamplesPerFrame(byte[] packet, int packet_offset, int Fs) {
         int audiosize;
         if ((packet[packet_offset] & 0x80) != 0) {
@@ -122,6 +137,13 @@ public class OpusPacketInfo {
     /// </summary>
     /// <param name="data">An Opus packet (must be at least 1 byte)</param>
     /// <returns>An OpusBandwidth value</returns>
+    /**
+     * <p>getBandwidth.</p>
+     *
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @return a {@link io.github.jaredmdobson.OpusBandwidth} object
+     */
     public static OpusBandwidth getBandwidth(byte[] packet, int packet_offset) {
         OpusBandwidth bandwidth;
         if ((packet[packet_offset] & 0x80) != 0) {
@@ -138,6 +160,13 @@ public class OpusPacketInfo {
         return bandwidth;
     }
 
+    /**
+     * <p>getNumEncodedChannels.</p>
+     *
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @return a int
+     */
     public static int getNumEncodedChannels(byte[] packet, int packet_offset) {
         return ((packet[packet_offset] & 0x4) != 0) ? 2 : 1;
     }
@@ -148,6 +177,14 @@ public class OpusPacketInfo {
     /// <param name="packet">An Opus packet</param>
     /// <param name="len">The packet's length (must be at least 1)</param>
     /// <returns>The number of frames in the packet</returns>
+    /**
+     * <p>getNumFrames.</p>
+     *
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @param len a int
+     * @return a int
+     */
     public static int getNumFrames(byte[] packet, int packet_offset, int len) {
         int count;
         if (len < 1) {
@@ -165,6 +202,15 @@ public class OpusPacketInfo {
         }
     }
 
+    /**
+     * <p>getNumSamples.</p>
+     *
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @param len a int
+     * @param Fs a int
+     * @return a int
+     */
     public static int getNumSamples(byte[] packet, int packet_offset, int len,
             int Fs) {
         int samples;
@@ -190,11 +236,27 @@ public class OpusPacketInfo {
     /// <param name="packet">An Opus packet</param>
     /// <param name="len">The packet's length</param>
     /// <returns>The size of the PCM samples that this packet will be decoded to by the specified decoder</returns>
+    /**
+     * <p>getNumSamples.</p>
+     *
+     * @param dec a {@link io.github.jaredmdobson.OpusDecoder} object
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @param len a int
+     * @return a int
+     */
     public static int getNumSamples(OpusDecoder dec,
             byte[] packet, int packet_offset, int len) {
         return getNumSamples(packet, packet_offset, len, dec.Fs);
     }
 
+    /**
+     * <p>getEncoderMode.</p>
+     *
+     * @param packet an array of {@link byte} objects
+     * @param packet_offset a int
+     * @return a {@link io.github.jaredmdobson.OpusMode} object
+     */
     public static OpusMode getEncoderMode(byte[] packet, int packet_offset) {
         OpusMode mode;
         if ((packet[packet_offset] & 0x80) != 0) {

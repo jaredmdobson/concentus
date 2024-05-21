@@ -36,8 +36,12 @@ package io.github.jaredmdobson;
 
 class Spread {
 
+    /** Constant <code>SPREAD_NONE=0</code> */
     public static final int SPREAD_NONE = 0;
+    /** Constant <code>SPREAD_LIGHT=1</code> */
     public static final int SPREAD_LIGHT = 1;
+    /** Constant <code>SPREAD_NORMAL=2</code> */
     public static final int SPREAD_NORMAL = 2;
+    /** Constant <code>SPREAD_AGGRESSIVE=3</code> */
     public static final int SPREAD_AGGRESSIVE = 3;
 }

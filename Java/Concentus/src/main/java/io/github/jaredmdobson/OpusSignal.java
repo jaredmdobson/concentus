@@ -34,6 +34,12 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusSignal class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public enum OpusSignal {
     OPUS_SIGNAL_UNKNOWN,
     OPUS_SIGNAL_AUTO,

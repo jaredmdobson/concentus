@@ -34,14 +34,29 @@ class BoxedValueByte {
 
     public byte Val;
 
+    /**
+     * <p>Constructor for BoxedValueByte.</p>
+     *
+     * @param v a byte
+     */
     public BoxedValueByte(byte v) {
         Val = v;
     }
 }
+/**
+ * <p>Constructor for BoxedValueShort.</p>
+ *
+ * @param v a short
+ */
 
 class BoxedValueShort {
 
     public short Val;
+/**
+ * <p>Constructor for BoxedValueInt.</p>
+ *
+ * @param v a int
+ */
 
     public BoxedValueShort(short v) {
         Val = v;

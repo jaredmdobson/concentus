@@ -34,6 +34,12 @@
  */
 package io.github.jaredmdobson;
 
+/**
+ * <p>OpusApplication class.</p>
+ *
+ * @author Jared M Dobson
+ * @version $Id: $Id
+ */
 public enum OpusApplication {
     OPUS_APPLICATION_UNIMPLEMENTED,
     /// <summary>
